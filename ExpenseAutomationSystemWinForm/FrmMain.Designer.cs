@@ -36,7 +36,7 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
-            this.txtDescription = new System.Windows.Forms.Label();
+            this.lblDesc = new System.Windows.Forms.Label();
             this.nudPrice = new System.Windows.Forms.NumericUpDown();
             this.lblPrice = new System.Windows.Forms.Label();
             this.txtTitle = new System.Windows.Forms.TextBox();
@@ -87,7 +87,7 @@
             // 
             this.gbExpense.Controls.Add(this.txtDesc);
             this.gbExpense.Controls.Add(this.flpButtons);
-            this.gbExpense.Controls.Add(this.txtDescription);
+            this.gbExpense.Controls.Add(this.lblDesc);
             this.gbExpense.Controls.Add(this.nudPrice);
             this.gbExpense.Controls.Add(this.lblPrice);
             this.gbExpense.Controls.Add(this.txtTitle);
@@ -144,6 +144,7 @@
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnUpdate
             // 
@@ -154,16 +155,16 @@
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
             // 
-            // txtDescription
+            // lblDesc
             // 
-            this.txtDescription.Dock = System.Windows.Forms.DockStyle.Top;
-            this.txtDescription.Location = new System.Drawing.Point(11, 208);
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
-            this.txtDescription.Size = new System.Drawing.Size(255, 30);
-            this.txtDescription.TabIndex = 7;
-            this.txtDescription.Text = "Description :";
-            this.txtDescription.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.lblDesc.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblDesc.Location = new System.Drawing.Point(11, 208);
+            this.lblDesc.Name = "lblDesc";
+            this.lblDesc.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
+            this.lblDesc.Size = new System.Drawing.Size(255, 30);
+            this.lblDesc.TabIndex = 7;
+            this.lblDesc.Text = "Description :";
+            this.lblDesc.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // nudPrice
             // 
@@ -178,11 +179,6 @@
             this.nudPrice.Name = "nudPrice";
             this.nudPrice.Size = new System.Drawing.Size(255, 28);
             this.nudPrice.TabIndex = 6;
-            this.nudPrice.Value = new decimal(new int[] {
-            99999999,
-            0,
-            0,
-            131072});
             // 
             // lblPrice
             // 
@@ -344,7 +340,7 @@
         private System.Windows.Forms.GroupBox gbExpense;
         private System.Windows.Forms.TextBox txtDesc;
         private System.Windows.Forms.FlowLayoutPanel flpButtons;
-        private System.Windows.Forms.Label txtDescription;
+        private System.Windows.Forms.Label lblDesc;
         private System.Windows.Forms.NumericUpDown nudPrice;
         private System.Windows.Forms.Label lblPrice;
         private System.Windows.Forms.TextBox txtTitle;

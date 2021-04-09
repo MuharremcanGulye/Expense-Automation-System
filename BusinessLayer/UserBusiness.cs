@@ -13,7 +13,7 @@ namespace BusinessLayer
     public class UserBusiness
     {
 
-        private SqlDataProvider provider = new SqlDataProvider(AppConfigHelper.GetConnectionString("ExpenseAutomationDBConnString"));
+        private SqlDataProvider provider = new SqlDataProvider(Constants.ConnectionString);
         
 
         public Staff StaffLogin(string username , string password)

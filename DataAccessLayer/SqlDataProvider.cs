@@ -44,5 +44,20 @@ namespace DataAccessLayer
 
             return result;
         }
+
+        public int RunQuery(string query)
+        {
+            int result = 0;
+
+            this.command.CommandText = query;
+
+            this.connection.Open();
+
+            result = this.command.ExecuteNonQuery();
+
+            this.connection.Close();
+
+            return result;
+        }
     }
 }
