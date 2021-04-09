@@ -34,13 +34,13 @@ namespace ExpenseAutomationSystemWinForm
             }
             else
             {
-                Staff staff = new Staff();
-                ub.StaffLogin(txtUsername.Text, txtPassword.Text);
-
+                Staff staff = ub.StaffLogin(txtUsername.Text, txtPassword.Text);
+                               
                 if(staff != null)
                 {
                     this.Hide();
                     FrmMain mainMenu = new FrmMain();
+                    mainMenu.LoggedInStaff = staff;
                     mainMenu.ShowDialog();
                     this.Close();
                 }

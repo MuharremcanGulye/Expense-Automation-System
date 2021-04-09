@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EntityLayer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,13 @@ namespace ExpenseAutomationSystemWinForm
         public FrmMain()
         {
             InitializeComponent();
+        }
+
+        public Staff LoggedInStaff { get; set; }
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+            lblStaffNameSurname.Text = LoggedInStaff.Name + " " + LoggedInStaff.Surname;
         }
     }
 }

@@ -25,13 +25,11 @@ namespace BusinessLayer
             provider.command.Parameters.AddWithValue("@Password", password);
 
             DataTable result = provider.GetDataTable(query);
-            Staff staff = null;
+            Staff staff = new Staff();
 
             if (result.Rows.Count > 0)
             {
                 DataRow dr = result.Rows[0];
-
-                staff = new Staff();
 
                 staff.ID = (int)dr["ID"];
                 staff.Name = dr["Name"].ToString();
