@@ -27,6 +27,11 @@ namespace ExpenseAutomationSystemWinForm
         {
             lblStaffNameSurname.Text = LoggedInStaff.Name + " " + LoggedInStaff.Surname;
 
+            GetStaffExpenses();
+        }
+
+        private void GetStaffExpenses()
+        {
             List<Expense> expenses = eb.GetExpenses(LoggedInStaff.ID);
 
             lstExpenses.DataSource = expenses;
@@ -51,7 +56,7 @@ namespace ExpenseAutomationSystemWinForm
 
             if(result > 0)
             {
-
+                GetStaffExpenses();
             }
             else
             {

@@ -36,20 +36,17 @@ namespace ExpenseAutomationSystemWinForm
             {
                 Staff staff = ub.StaffLogin(txtUsername.Text, txtPassword.Text);
                                
-                if(staff != null)
+                if(staff.Username == null && staff.Password == null)
+                {
+                    MessageBox.Show("Username or Password is not matching","Login Error",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                }
+                else
                 {
                     this.Hide();
                     FrmMain mainMenu = new FrmMain();
                     mainMenu.LoggedInStaff = staff;
                     mainMenu.ShowDialog();
                     this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Username or Password is not matching",
-                        "Login Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
                 }          
             }
         }
