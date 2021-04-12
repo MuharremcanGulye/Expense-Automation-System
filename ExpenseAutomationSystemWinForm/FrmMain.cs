@@ -14,7 +14,8 @@ namespace ExpenseAutomationSystemWinForm
 {
     public partial class FrmMain : Form
     {
-        ExpenseBusiness eb = new ExpenseBusiness();
+        ExpenseBusiness EB = new ExpenseBusiness();
+        StaffBusiness SB = new StaffBusiness();
 
         public FrmMain()
         {
@@ -28,11 +29,16 @@ namespace ExpenseAutomationSystemWinForm
             lblStaffNameSurname.Text = LoggedInStaff.Name + " " + LoggedInStaff.Surname;
 
             GetStaffExpenses();
+
+            List<Staff> ResponsibleForList = new List<Staff>();
+            ResponsibleForList.Add(LoggedInStaff);
+
+            ResponsibleForList.AddRange(SB.GetStaffByResponsibleID(LoggedInStaff.ID));
         }
 
         private void GetStaffExpenses()
         {
-            List<Expense> expenses = eb.GetExpenses(LoggedInStaff.ID);
+            List<Expense> expenses = EB.GetExpenses(LoggedInStaff.ID);
 
             lstExpenses.DataSource = expenses;
 
@@ -52,7 +58,7 @@ namespace ExpenseAutomationSystemWinForm
                 StatusID = (byte)StatusEnum.WaitingForApprove
             };
 
-            int result = eb.AddExpense(expense);
+            int result = EB.AddExpense(expense);
 
             if(result > 0)
             {
@@ -123,7 +129,7 @@ namespace ExpenseAutomationSystemWinForm
             expense.Cost = nudPrice.Value;
             expense.StatusID = (byte)StatusEnum.WaitingForApprove;
 
-            if(eb.UpdateExpense(expense) > 0)
+            if(EB.UpdateExpense(expense) > 0)
             {
                 MessageBox.Show("Expense has been Updated");
                 GetStaffExpenses();
@@ -132,8 +138,7 @@ namespace ExpenseAutomationSystemWinForm
             {
                 MessageBox.Show("Expense could not been updated");
             }
-            
-
+           
         }
 
         private void lstExpenses_Format(object sender, ListControlConvertEventArgs e)
@@ -141,6 +146,37 @@ namespace ExpenseAutomationSystemWinForm
             Expense expense = e.ListItem as Expense;
 
             e.Value = string.Format("{0} ({1})", expense.Title, StatusEnumHelper.getStatusString(expense.StatusID));
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if(lstExpenses.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select an expense to delete");
+                return;
+            }
+
+            Expense expense = lstExpenses.SelectedItem as Expense;
+
+            DialogResult result = MessageBox.Show("Are you sure to delete" + expense.Title + "titled expense?",
+                "Expense Delete",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button3);
+
+            if(result == System.Windows.Forms.DialogResult.Yes)
+            {
+                if (EB.DeleteExpense(expense) > 0)
+                {
+                    MessageBox.Show("Expense has been deleted");
+                    GetStaffExpenses();
+                }
+                else
+                {
+                    MessageBox.Show("Expense could not be deleted");
+                }
+            }
+
         }
     }
 }

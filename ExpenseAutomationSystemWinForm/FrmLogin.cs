@@ -14,7 +14,7 @@ namespace ExpenseAutomationSystemWinForm
 {
     public partial class FrmLogin : Form
     {
-        UserBusiness ub = new UserBusiness();
+        StaffBusiness sb = new StaffBusiness();
 
         public FrmLogin()
         {
@@ -34,7 +34,7 @@ namespace ExpenseAutomationSystemWinForm
             }
             else
             {
-                Staff staff = ub.StaffLogin(txtUsername.Text, txtPassword.Text);
+                Staff staff = sb.StaffLogin(txtUsername.Text, txtPassword.Text);
                                
                 if(staff.Username == null && staff.Password == null)
                 {

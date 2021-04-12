@@ -10,7 +10,7 @@ using EntityLayer;
 
 namespace BusinessLayer
 {
-    public class UserBusiness
+    public class StaffBusiness
     {
 
         private SqlDataProvider provider = new SqlDataProvider(Constants.ConnectionString);
@@ -44,6 +44,41 @@ namespace BusinessLayer
             }
 
             return staff;
+        }
+
+        public List<Staff> GetStaffByResponsibleID(int RespID)
+        {
+            string query = "SELECT * FROM Staff WHERE IsActive = 1 AND ToResponsibleID = @ID";
+
+            provider.command.Parameters.Clear();
+
+            provider.command.Parameters.AddWithValue("@ID", RespID);
+
+            DataTable StaffTable = provider.GetDataTable(query);
+
+            List<Staff> StaffList = new List<Staff>();
+
+            if(StaffTable.Rows.Count > 0)
+            {
+                foreach(DataRow dr in StaffTable.Rows)
+                {
+                    Staff staff = new Staff();
+
+                    staff.ID = (int)dr["ID"];
+                    staff.Name = dr["Name"].ToString();
+                    staff.Surname = dr["Surname"].ToString();
+                    staff.Username = dr["Username"].ToString();
+                    staff.Password = dr["Password"].ToString();
+                    staff.IsActive = (bool)dr["IsActive"];
+                    staff.ToResponsibleID = (dr.IsNull("ToResponsibleID") == true ? null : (int?)dr["ToResponsbleID"]);
+                    staff.StaffTypeID = (byte)dr["StaffTypeID"];
+
+                    StaffList.Add(staff);
+
+                }
+            }
+
+            return StaffList;
         }
     }
 }

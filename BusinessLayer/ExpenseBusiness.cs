@@ -81,5 +81,16 @@ namespace BusinessLayer
 
             return provider.RunQuery(query);
         }
+
+        public int DeleteExpense(Expense expense)
+        {
+            string query = "DELETE FROM Expense where ID = @ID";
+
+            provider.command.Parameters.Clear();
+            provider.command.Parameters.AddWithValue("@ID", expense.ID);
+
+            return provider.RunQuery(query);
+
+        }
     }
 }

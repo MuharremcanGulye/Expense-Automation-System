@@ -45,7 +45,7 @@
     <Compile Include="ExpenseBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StatusEnumHelper.cs" />
-    <Compile Include="UserBusiness.cs" />
+    <Compile Include="StaffBusiness.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonLayer\CommonLayer.csproj">
