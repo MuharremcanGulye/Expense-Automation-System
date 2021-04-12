@@ -154,6 +154,7 @@
             this.btnUpdate.TabIndex = 2;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // lblDesc
             // 
@@ -253,6 +254,8 @@
             this.lstExpenses.Name = "lstExpenses";
             this.lstExpenses.Size = new System.Drawing.Size(557, 477);
             this.lstExpenses.TabIndex = 1;
+            this.lstExpenses.SelectedIndexChanged += new System.EventHandler(this.lstExpenses_SelectedIndexChanged);
+            this.lstExpenses.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.lstExpenses_Format);
             // 
             // flowLayoutPanel1
             // 

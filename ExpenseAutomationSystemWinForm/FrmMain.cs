@@ -65,5 +65,82 @@ namespace ExpenseAutomationSystemWinForm
 
 
         }
+
+        private void lstExpenses_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(lstExpenses.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            Expense expense = lstExpenses.SelectedItem as Expense;
+
+            if (expense != null)
+            {
+                txtTitle.Text = expense.Title;
+                txtDesc.Text = expense.Description;
+                nudPrice.Value = expense.Cost;
+                dtpDate.Value = expense.Date;
+
+                //We need to change expense status as needs approve.
+            }
+
+            if (expense.StatusID == (byte)StatusEnum.Declined || expense.StatusID == (byte)StatusEnum.Paid)
+            {
+                btnUpdate.Enabled = false;
+            }
+            else
+            {
+                btnUpdate.Enabled = true;
+            }
+
+            if(expense.StatusID == (byte)StatusEnum.Paid)
+            {
+                btnDelete.Enabled = false;
+            }
+            else
+            {
+                btnDelete.Enabled = true;
+            }
+
+
+
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if(lstExpenses.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select an expense to update");
+                return;
+            }
+
+            Expense expense = lstExpenses.SelectedItem as Expense;
+
+            expense.Title = txtTitle.Text;
+            expense.Description = txtDesc.Text;
+            expense.Date = dtpDate.Value;
+            expense.Cost = nudPrice.Value;
+            expense.StatusID = (byte)StatusEnum.WaitingForApprove;
+
+            if(eb.UpdateExpense(expense) > 0)
+            {
+                MessageBox.Show("Expense has been Updated");
+                GetStaffExpenses();
+            }
+            else
+            {
+                MessageBox.Show("Expense could not been updated");
+            }
+            
+
+        }
+
+        private void lstExpenses_Format(object sender, ListControlConvertEventArgs e)
+        {
+            Expense expense = e.ListItem as Expense;
+
+            e.Value = string.Format("{0} ({1})", expense.Title, StatusEnumHelper.getStatusString(expense.StatusID));
+        }
     }
 }

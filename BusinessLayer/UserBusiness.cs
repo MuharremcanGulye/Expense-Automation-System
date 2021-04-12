@@ -21,6 +21,8 @@ namespace BusinessLayer
             string query = "SELECT * FROM Staff" +
                                 " AS S WHERE S.Username = @Username AND S.Password = @Password AND IsActive = 1";
 
+            provider.command.Parameters.Clear();
+
             provider.command.Parameters.AddWithValue("@Username", username);
             provider.command.Parameters.AddWithValue("@Password", password);
 

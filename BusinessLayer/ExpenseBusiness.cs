@@ -64,5 +64,22 @@ namespace BusinessLayer
             }
             return expenses;       
         }
+
+        public int UpdateExpense(Expense expense)
+        {
+            string query = "UPDATE EXPENSE SET Title=@Title, Description=@Description, Date=@Date, Cost=@Cost, StatusID = @StatusID where ID=@ID";
+
+            provider.command.Parameters.Clear();
+
+            provider.command.CommandText = query;
+            provider.command.Parameters.AddWithValue("@ID", expense.ID);
+            provider.command.Parameters.AddWithValue("@Title", expense.Title);
+            provider.command.Parameters.AddWithValue("@Date", expense.Date);
+            provider.command.Parameters.AddWithValue("@Cost", expense.Cost);
+            provider.command.Parameters.AddWithValue("@Description", expense.Description);
+            provider.command.Parameters.AddWithValue("@StatusID", expense.StatusID);
+
+            return provider.RunQuery(query);
+        }
     }
 }
