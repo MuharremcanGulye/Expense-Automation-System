@@ -39,7 +39,7 @@ namespace BusinessLayer
                 staff.Username = dr["Username"].ToString();
                 staff.Password = dr["Password"].ToString();
                 staff.IsActive = (bool)dr["IsActive"];
-                staff.ToResponsibleID = (dr.IsNull("ToResponsibleID") == true ? null : (int?)dr["ToResponsbleID"]);
+                staff.ToResponsibleID = (dr.IsNull("ToResponsibleID") == true ? null : (int?)dr["ToResponsibleID"]);
                 staff.StaffTypeID = (byte)dr["StaffTypeID"];
             }
 
@@ -70,7 +70,7 @@ namespace BusinessLayer
                     staff.Username = dr["Username"].ToString();
                     staff.Password = dr["Password"].ToString();
                     staff.IsActive = (bool)dr["IsActive"];
-                    staff.ToResponsibleID = (dr.IsNull("ToResponsibleID") == true ? null : (int?)dr["ToResponsbleID"]);
+                    staff.ToResponsibleID = (dr.IsNull("ToResponsibleID") == true ? null : (int?)dr["ToResponsibleID"]);
                     staff.StaffTypeID = (byte)dr["StaffTypeID"];
 
                     StaffList.Add(staff);

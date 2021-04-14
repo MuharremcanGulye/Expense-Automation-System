@@ -277,6 +277,8 @@
             this.cmbExpenseOwner.Name = "cmbExpenseOwner";
             this.cmbExpenseOwner.Size = new System.Drawing.Size(350, 29);
             this.cmbExpenseOwner.TabIndex = 0;
+            this.cmbExpenseOwner.SelectedIndexChanged += new System.EventHandler(this.cmbExpenseOwner_SelectedIndexChanged);
+            this.cmbExpenseOwner.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.cmbExpenseOwner_Format);
             // 
             // lblExpenseOwner
             // 

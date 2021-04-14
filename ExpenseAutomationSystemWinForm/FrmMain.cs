@@ -29,11 +29,17 @@ namespace ExpenseAutomationSystemWinForm
             lblStaffNameSurname.Text = LoggedInStaff.Name + " " + LoggedInStaff.Surname;
 
             GetStaffExpenses();
+            GetResponsibleForStaff();
+        }
 
+        private void GetResponsibleForStaff()
+        {
             List<Staff> ResponsibleForList = new List<Staff>();
             ResponsibleForList.Add(LoggedInStaff);
 
             ResponsibleForList.AddRange(SB.GetStaffByResponsibleID(LoggedInStaff.ID));
+
+            cmbExpenseOwner.DataSource = ResponsibleForList;
         }
 
         private void GetStaffExpenses()
@@ -177,6 +183,27 @@ namespace ExpenseAutomationSystemWinForm
                 }
             }
 
+        }
+
+        private void cmbExpenseOwner_Format(object sender, ListControlConvertEventArgs e)
+        {
+            Staff staff = e.ListItem as Staff;
+
+            e.Value = string.Format("{0} {1} ", staff.Name, staff.Surname);
+        }
+
+        private void cmbExpenseOwner_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cmbExpenseOwner.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            Staff staff = cmbExpenseOwner.SelectedItem as Staff;
+            List<Expense> expenses = EB.GetExpenses(staff.ID);
+
+            lstExpenses.DataSource = expenses;
+            lstExpenses.DisplayMember = "Title";
         }
     }
 }
