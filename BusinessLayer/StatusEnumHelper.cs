@@ -22,6 +22,8 @@ namespace BusinessLayer
                     return "NeedsEdit";
                 case 4:
                     return "Paid";
+                case 5:
+                    return "Approved";
                 default:
                     return string.Empty;
             }
@@ -39,6 +41,8 @@ namespace BusinessLayer
                     return "NeedsEdit";
                 case StatusEnum.Paid:
                     return "Paid";
+                case StatusEnum.Approved:
+                    return "Approved";
                 default:
                     return string.Empty;
             }

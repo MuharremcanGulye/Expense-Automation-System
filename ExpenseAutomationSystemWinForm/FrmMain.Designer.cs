@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.menuStripExpenseSystem = new System.Windows.Forms.SplitContainer();
             this.gbExpense = new System.Windows.Forms.GroupBox();
@@ -50,6 +51,11 @@
             this.lblExpenseOwner = new System.Windows.Forms.Label();
             this.mnuStripExpense = new System.Windows.Forms.MenuStrip();
             this.lblStaffNameSurname = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsExpenseManage = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsApprove = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsDecline = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.menuStripExpenseSystem)).BeginInit();
             this.menuStripExpenseSystem.Panel1.SuspendLayout();
             this.menuStripExpenseSystem.Panel2.SuspendLayout();
@@ -60,6 +66,7 @@
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.mnuStripExpense.SuspendLayout();
+            this.cmsExpenseManage.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStripExpenseSystem
@@ -309,6 +316,43 @@
             this.lblStaffNameSurname.Size = new System.Drawing.Size(158, 24);
             this.lblStaffNameSurname.Text = "Staff Name Surname";
             // 
+            // cmsExpenseManage
+            // 
+            this.cmsExpenseManage.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsExpenseManage.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsApprove,
+            this.cmsUpdate,
+            this.toolStripMenuItem1,
+            this.cmsDecline});
+            this.cmsExpenseManage.Name = "cmsExpenseManage";
+            this.cmsExpenseManage.Size = new System.Drawing.Size(211, 110);
+            // 
+            // cmsApprove
+            // 
+            this.cmsApprove.Name = "cmsApprove";
+            this.cmsApprove.Size = new System.Drawing.Size(210, 24);
+            this.cmsApprove.Text = "Approve";
+            this.cmsApprove.Click += new System.EventHandler(this.cmsApprove_Click);
+            // 
+            // cmsUpdate
+            // 
+            this.cmsUpdate.Name = "cmsUpdate";
+            this.cmsUpdate.Size = new System.Drawing.Size(210, 24);
+            this.cmsUpdate.Text = "Update";
+            this.cmsUpdate.Click += new System.EventHandler(this.cmsUpdate_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(132, 6);
+            // 
+            // cmsDecline
+            // 
+            this.cmsDecline.Name = "cmsDecline";
+            this.cmsDecline.Size = new System.Drawing.Size(210, 24);
+            this.cmsDecline.Text = "Decline";
+            this.cmsDecline.Click += new System.EventHandler(this.cmsDecline_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -336,6 +380,7 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.mnuStripExpense.ResumeLayout(false);
             this.mnuStripExpense.PerformLayout();
+            this.cmsExpenseManage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -363,5 +408,10 @@
         private System.Windows.Forms.ComboBox cmbExpenseOwner;
         private System.Windows.Forms.Label lblExpenseOwner;
         private System.Windows.Forms.ToolStripMenuItem lblStaffNameSurname;
+        private System.Windows.Forms.ContextMenuStrip cmsExpenseManage;
+        private System.Windows.Forms.ToolStripMenuItem cmsApprove;
+        private System.Windows.Forms.ToolStripMenuItem cmsUpdate;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem cmsDecline;
     }
 }

@@ -11,6 +11,7 @@ namespace EntityLayer
         WaitingForApprove = 1,
         Declined = 2,
         NeedsEdit = 3,
-        Paid = 4
+        Paid = 4,
+        Approved = 5
     }
 }

@@ -44,11 +44,14 @@ namespace ExpenseAutomationSystemWinForm
 
         private void GetStaffExpenses()
         {
-            List<Expense> expenses = EB.GetExpenses(LoggedInStaff.ID);
+            if(cmbExpenseOwner.SelectedIndex > -1)
+            {
+                Staff staff = cmbExpenseOwner.SelectedItem as Staff;
 
-            lstExpenses.DataSource = expenses;
-
-            lstExpenses.DisplayMember = "Title";
+                List<Expense> expenses = EB.GetExpenses(staff.ID);
+                lstExpenses.DataSource = expenses;
+            }
+           
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -114,9 +117,6 @@ namespace ExpenseAutomationSystemWinForm
             {
                 btnDelete.Enabled = true;
             }
-
-
-
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -200,10 +200,85 @@ namespace ExpenseAutomationSystemWinForm
             }
 
             Staff staff = cmbExpenseOwner.SelectedItem as Staff;
+
+            if(staff.Equals(LoggedInStaff))
+            {
+                flpButtons.Enabled = true;
+                lstExpenses.ContextMenuStrip = null;
+            }
+            else
+            {
+                flpButtons.Enabled = false;
+                lstExpenses.ContextMenuStrip = cmsExpenseManage;
+            }
+
             List<Expense> expenses = EB.GetExpenses(staff.ID);
 
             lstExpenses.DataSource = expenses;
             lstExpenses.DisplayMember = "Title";
+        }
+
+        private void cmsApprove_Click(object sender, EventArgs e)
+        {
+            if(lstExpenses.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please Select an Expense to Manage");
+                return;
+            }
+
+            Expense expense = lstExpenses.SelectedItem as Expense;
+            expense.StatusID = (byte)StatusEnum.Approved;
+
+            if(EB.UpdateExpense(expense) > 0)
+            {
+                GetStaffExpenses();
+            }
+            else
+            {
+                MessageBox.Show("Expense Could not be Approved");
+            }
+        }
+
+        private void cmsUpdate_Click(object sender, EventArgs e)
+        {
+            if (lstExpenses.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please Select an Expense to Manage");
+                return;
+            }
+
+            Expense expense = lstExpenses.SelectedItem as Expense;
+            expense.StatusID = (byte)StatusEnum.NeedsEdit;
+
+            if (EB.UpdateExpense(expense) > 0)
+            {
+                GetStaffExpenses();
+            }
+            else
+            {
+                MessageBox.Show("Expense Could not be Updated");
+            }
+        }
+
+        private void cmsDecline_Click(object sender, EventArgs e)
+        {
+            if (lstExpenses.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please Select an Expense to Manage");
+                return;
+            }
+
+            Expense expense = lstExpenses.SelectedItem as Expense;
+            expense.StatusID = (byte)StatusEnum.Declined;
+
+            if (EB.UpdateExpense(expense) > 0)
+            {
+                GetStaffExpenses();
+            }
+            else
+            {
+                MessageBox.Show("Expense Could not be Declined");
+            }
         }
     }
 }
